@@ -18,7 +18,7 @@ export default function Home() {
             <button>Share Your recipe</button>
         </div>
         <div className="right">
-            <img src={foodRecipeImage} alt="recipe image" width="300px" height="320px" />
+            <img src={foodRecipeImage} alt="recipe image" width="300px" height="300px" />
         </div>
     </section>
     <div className="bg">
