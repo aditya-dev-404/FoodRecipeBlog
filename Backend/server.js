@@ -17,8 +17,8 @@ const userRouters = require("./routes/user.js")
 
 
 
-app.use("/recipe",recipeRouters)
 app.use("/user",userRouters);
+app.use("/recipe",recipeRouters)
 
 
 
