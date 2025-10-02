@@ -291,3 +291,10 @@ section{
 }
 
 
+.form-control #image{
+  max-width: 300px;
+  margin-top: 30px;
+}
+#imageLabel{
+  margin-top: 30px;
+}

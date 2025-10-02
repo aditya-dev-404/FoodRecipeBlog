@@ -5,6 +5,7 @@ import Home from './pages/Home.jsx'
 import MainNavigation from './components/MainNavigation.jsx';
 import axios from 'axios'
 import AddFoodRecipe from './pages/AddFoodRecipe.jsx';
+import EditRecipe from './pages/EditRecipe.jsx';
 
 
 const getAllRecipes = async () => {
@@ -22,14 +23,19 @@ const getMyRecipes = async () => {
   return allRecipes.filter(item => item.createdBy === user._id);
 }
 
+const getFavRecipies = () => {
+  return JSON.parse(localStorage.getItem("fav"))
+}
+
 
 const router = createBrowserRouter([
   {
     path: "/", element: <MainNavigation />, children: [
       { path: "/", element: <Home />, loader: getAllRecipes },
       { path: "myRecipe", element: <Home />, loader: getMyRecipes },
-      { path: "favRecipe", element: <Home /> },
-      { path: "addRecipe", element: <AddFoodRecipe /> }
+      { path: "favRecipe", element: <Home />, loader:getFavRecipies },
+      { path: "addRecipe", element: <AddFoodRecipe /> },
+      { path: "editRecipe/:id", element: <EditRecipe /> }
     ]
   }
 ])
