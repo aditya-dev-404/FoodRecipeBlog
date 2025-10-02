@@ -1,12 +1,25 @@
 import React from 'react'
 import foodRecipeImage from '../assets/image1.png';
 import RecipeItems from '../components/RecipeItems';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Modal from '../components/Modal';
+import InputForm from '../components/InputForm';
 
 
 export default function Home() {
+    const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false);
+    const addRecipe = ()=>{
+        let token = localStorage.getItem("token")
+        if(token){
+            navigate("/addRecipe");
+        }else{
+            setIsOpen(true);
+        }
+    }
   return (
     <>
-
     <section className="home">
         <div className="left">
             <h1>Food Recipe</h1>
@@ -15,7 +28,7 @@ export default function Home() {
             Dolorum, architecto? Ab, vitae vero!
             Veritatis, adipisci tempore. Quidem, molestiae.
             Tenetur dicta nostrum tempore eligendi?</h5>
-            <button>Share Your recipe</button>
+            <button onClick={addRecipe}>Share Your recipe</button>
         </div>
         <div className="right">
             <img src={foodRecipeImage} alt="recipe image" width="300px" height="300px" />
@@ -27,6 +40,7 @@ export default function Home() {
     <div className="recipe">
         <RecipeItems/>
     </div>
+    {(isOpen) && <Modal onClose={() => setIsOpen(false)}> <InputForm setIsOpen={() => setIsOpen(false)} /> </Modal>}
     </>
   )
 }

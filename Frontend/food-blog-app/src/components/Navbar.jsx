@@ -7,13 +7,14 @@ import { useEffect } from 'react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  let token = localStorage.getItem("token");
+    const [token, setToken] = useState(localStorage.getItem("token"));
+  // let token = localStorage.getItem("token");
   const [isLogin, setIsLogin] = useState(token ? false : true);
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    setIsLogin(token ? false : true)
+    setIsLogin(!token)
   }, [token])
   const userString = localStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
@@ -22,6 +23,7 @@ export default function Navbar() {
     if (token) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      setToken(null);
       setIsLogin(true);
       navigate('/');
     } else {
@@ -36,10 +38,10 @@ export default function Navbar() {
           <li><NavLink to="/">Home</NavLink></li>
           <li onClick={() => isLogin && setIsOpen(true)}><NavLink to={!isLogin ? "/myRecipe" : "/"}>My Recipe</NavLink></li>
           <li onClick={() => isLogin && setIsOpen(true)}><NavLink to={!isLogin ? "/favRecipe" : "/"}>Favourites</NavLink></li>
-          <li onClick={checkLogin}><p className='login' >{(isLogin) ? "Login" : user.username}</p></li>
+          <li onClick={checkLogin}><p className='login' >{(isLogin) ? "Login" : "Logout "+user.username}</p></li>
         </ul>
       </header>
-      {(isOpen) && <Modal onClose={() => setIsOpen(false)}> <InputForm setIsOpen={() => setIsOpen(false)} /> </Modal>}
+      {(isOpen) && <Modal onClose={() => setIsOpen(false)}> <InputForm setIsOpen={() => setIsOpen(false)} setToken={setToken} /> </Modal>}
     </>
   )
 }

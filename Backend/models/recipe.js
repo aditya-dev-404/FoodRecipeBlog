@@ -6,7 +6,7 @@ const recipeSchema = new mongoose.Schema({
         required: true
     },
     ingredients:{
-        type: String,
+        type: Array,
         required: true
     }, 
     instructions:{
@@ -18,7 +18,12 @@ const recipeSchema = new mongoose.Schema({
         
     },
     coverImage:{
-        type: String,
+        url: String,
+        filename: String,
+    },
+    createdBy:{
+        type:mongoose.Schema.ObjectId,
+        ref: "User"
     }
 
 },{timestamps:true})

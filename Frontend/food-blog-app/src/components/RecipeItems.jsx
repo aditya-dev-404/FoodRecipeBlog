@@ -13,13 +13,13 @@ export default function RecipeItems() {
             allRecipes?.map((item, index)=>{
                 return(
                     <div key={index} className="card">
-                        <img src={recipeImage} alt="recipe Image" width="120px" height="100px"/>
+                        <img src={item.coverImage?.url || recipeImage} alt={item.title}width="120px" height="100px"/>
                         <div className="card-body">
                             <div className="title">
                                 {item.title}
                             </div>
                             <div className="icons">
-                                <div className="timer"><BsStopwatchFill />30 min</div>
+                                <div className="timer"><BsStopwatchFill /> {item.time}</div>
                                 <div className="heart"><FaHeart/></div>
                             </div>
 
