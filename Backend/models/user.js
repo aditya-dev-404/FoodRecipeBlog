@@ -14,7 +14,13 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
-    }
+    },
+    favourites: [
+        { 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Recipe' 
+        }
+    ]
 }, {timestamps: true});
 
 module.exports = new mongoose.model("User",userSchema);

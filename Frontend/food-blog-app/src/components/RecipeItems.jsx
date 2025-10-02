@@ -15,12 +15,25 @@ import { useEffect } from 'react';
 export default function RecipeItems() {
     const recipes = useLoaderData()
     const [allRecipes, setAllRecipes] = useState([]);
-    // let favItems = JSON.parse(localStorage.getItem("fav"))??[]
-    const [favItems, setFavItems] = useState(() => JSON.parse(localStorage.getItem("fav")) ?? []);
+    const [favItems, setFavItems] = useState([]);
+    useEffect(() => {
+        setAllRecipes(recipes);
+    }, [recipes]);
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await axios.get("http://localhost:8080/user/favourites", {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setFavItems(res.data); // array of recipe IDs
+            } catch (err) {
+                console.error("Failed to fetch favorites", err);
+            }
+        };
+        fetchFavorites();
+    }, []);
 
-    useEffect(()=>{
-        setAllRecipes(recipes)
-    },[recipes])
 
     const onDelete = async (id) => {
         try {
@@ -28,24 +41,31 @@ export default function RecipeItems() {
             alert("Recipe deleted successfully");
             // remove from state OR navigate
             setAllRecipes((prev) => prev.filter((r) => r._id !== id));
-            let filterItem = favItems.filter(recipe=>recipe._id !== id)
+            let filterItem = favItems.filter(recipe => recipe._id !== id)
             localStorage.setItem("fav", JSON.stringify(filterItem))
         } catch (err) {
             console.error("Delete failed:", err);
         }
     };
-    const favRecipe = (item) => {
-    let updatedFavs;
-    if (favItems.some(recipe => recipe._id === item._id)) {
-        // remove
-        updatedFavs = favItems.filter(recipe => recipe._id !== item._id);
-    } else {
-        // add
-        updatedFavs = [...favItems, item];
-    }
-    setFavItems(updatedFavs);
-    localStorage.setItem("fav", JSON.stringify(updatedFavs));
-};
+    const favRecipe = async (item) => {
+        const token = localStorage.getItem("token");
+        try {
+            if (favItems.includes(item._id)) {
+                await axios.delete(`http://localhost:8080/user/fav/${item._id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setFavItems(prev => prev.filter(id => id !== item._id));
+            } else {
+                await axios.post(`http://localhost:8080/user/fav/${item._id}`, {}, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setFavItems(prev => [...prev, item._id]);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
 
     let path = window.location.pathname === "/myRecipe" ? true : false;
@@ -66,7 +86,8 @@ export default function RecipeItems() {
                                         <div className="delete"><MdDelete className='deleteIcon' onClick={() => onDelete(item._id)} /></div>
                                         <Link to={`/editRecipe/${item._id}`} className="editIcon"><FaEdit /></Link>
                                     </div> :
-                                        <div className="heart"><FaHeart onClick={()=>favRecipe(item)} style={{color:(favItems).some(res => res._id === item._id) ? "red": ""}}/></div>}
+                                        <div className="heart"><FaHeart onClick={() => favRecipe(item)}
+                                            style={{ color: favItems.includes(item._id) ? "red" : "" }} /> </div>}
                                 </div>
 
                             </div>
@@ -77,3 +98,4 @@ export default function RecipeItems() {
         </div>
     )
 }
+

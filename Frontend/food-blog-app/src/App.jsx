@@ -18,14 +18,21 @@ const getAllRecipes = async () => {
 }
 
 const getMyRecipes = async () => {
-  let user = JSON.parse(localStorage.getItem("user"));
-  let allRecipes = await getAllRecipes();
-  return allRecipes.filter(item => item.createdBy === user._id);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const allRecipes = await getAllRecipes();
+  return allRecipes.filter(item => item.createdBy.toString() === user.id); // make sure to use `user.id` or `_id`
 }
 
-const getFavRecipies = () => {
-  return JSON.parse(localStorage.getItem("fav"))
-}
+
+const getFavRecipes = async () => {
+    const token = localStorage.getItem("token");
+    const res = await axios.get("http://localhost:8080/user/favourites", {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data; // returns array of recipe objects
+};
+
+
 
 
 const router = createBrowserRouter([
@@ -33,7 +40,7 @@ const router = createBrowserRouter([
     path: "/", element: <MainNavigation />, children: [
       { path: "/", element: <Home />, loader: getAllRecipes },
       { path: "myRecipe", element: <Home />, loader: getMyRecipes },
-      { path: "favRecipe", element: <Home />, loader:getFavRecipies },
+      { path: "favRecipe", element: <Home />, loader: getFavRecipes },
       { path: "addRecipe", element: <AddFoodRecipe /> },
       { path: "editRecipe/:id", element: <EditRecipe /> }
     ]

@@ -29,27 +29,70 @@ export default function AddFoodRecipe() {
         }
     }
 
-    const handleOnSubmit = async (event) => {
+//     const handleOnSubmit = async (event) => {
+//     event.preventDefault();
+//     setLoading(true);
+//     setError('');
+
+//     try {
+//         const token = localStorage.getItem('token');
+        
+//         // Create FormData to send file + data
+//         const formData = new FormData();
+//         formData.append('title', recipeData.title);
+//         formData.append('ingredients', JSON.stringify(recipeData.ingredients));
+//         formData.append('instructions', recipeData.instructions);
+//         formData.append('time', recipeData.time);
+        
+//         // Append image if exists
+//         if (image) {
+//             formData.append('coverImage', image);
+//         }
+        
+//         // Send request with FormData
+//         await axios.post("http://localhost:8080/recipe", formData, {
+//             headers: {
+//                 'Content-Type': 'multipart/form-data',
+//                 'Authorization': `Bearer ${token}`
+//             }
+//         });
+
+//         navigate("/");
+        
+//     } catch (err) {
+//         setError(err.response?.data?.error || 'Failed to add recipe');
+//         console.error('Error:', err);
+//     } finally {
+//         setLoading(false);
+//     }
+// }
+
+// In your handleOnSubmit function, after successful recipe creation:
+const handleOnSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError('');
 
     try {
         const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem("user"));
         
-        // Create FormData to send file + data
+        if (!token || !user) {
+            setError('Please login first');
+            return;
+        }
+
         const formData = new FormData();
         formData.append('title', recipeData.title);
         formData.append('ingredients', JSON.stringify(recipeData.ingredients));
         formData.append('instructions', recipeData.instructions);
         formData.append('time', recipeData.time);
+        formData.append('createdBy', user._id); // Ensure createdBy is set
         
-        // Append image if exists
         if (image) {
             formData.append('coverImage', image);
         }
         
-        // Send request with FormData
         await axios.post("http://localhost:8080/recipe", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -110,3 +153,5 @@ export default function AddFoodRecipe() {
         </>
     )
 }
+
+
