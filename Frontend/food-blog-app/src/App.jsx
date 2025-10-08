@@ -6,6 +6,7 @@ import MainNavigation from './components/MainNavigation.jsx';
 import axios from 'axios'
 import AddFoodRecipe from './pages/AddFoodRecipe.jsx';
 import EditRecipe from './pages/EditRecipe.jsx';
+import RecipeDetail from './pages/RecipeDetails.jsx';
 
 
 const getAllRecipes = async () => {
@@ -16,6 +17,12 @@ const getAllRecipes = async () => {
     })
   return allRecipes
 }
+
+// In App.jsx
+const getRecipeById = async ({ params }) => {
+  const res = await axios.get(`http://localhost:8080/recipe/${params.id}`);
+  return res.data;
+};
 
 const getMyRecipes = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -42,7 +49,9 @@ const router = createBrowserRouter([
       { path: "myRecipe", element: <Home />, loader: getMyRecipes },
       { path: "favRecipe", element: <Home />, loader: getFavRecipes },
       { path: "addRecipe", element: <AddFoodRecipe /> },
-      { path: "editRecipe/:id", element: <EditRecipe /> }
+      { path: "editRecipe/:id", element: <EditRecipe /> },
+      { path: "recipe/:id", element: <RecipeDetail />, loader: getRecipeById }
+
     ]
   }
 ])

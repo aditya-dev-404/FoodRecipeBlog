@@ -9,9 +9,13 @@ const getRecipes = async (req, res) => {
 
 // 📌 Get single recipe
 const getRecipe = async (req, res) => {
-    const { id } = req.params;
-    const recipe = await Recipes.findById(id);
-    return res.json(recipe);
+  try {
+    const recipe = await Recipes.findById(req.params.id);
+    if (!recipe) return res.status(404).json({ message: "Recipe not found" });
+    res.json(recipe);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 // 📌 Add recipe

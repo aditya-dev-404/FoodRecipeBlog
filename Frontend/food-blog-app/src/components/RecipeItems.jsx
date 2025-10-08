@@ -74,7 +74,8 @@ export default function RecipeItems() {
             {
                 allRecipes?.map((item, index) => {
                     return (
-                        <div key={index} className="card">
+                        // <div key={index} className="card">
+                        <Link to={`/recipe/${item._id}`} key={index} className="card">
                             <img src={item.coverImage?.url || recipeImage} alt={item.title} width="120px" height="100px" />
                             <div className="card-body">
                                 <div className="title">
@@ -83,15 +84,28 @@ export default function RecipeItems() {
                                 <div className="icons">
                                     <div className="timer"><BsStopwatchFill /> {item.time}</div>
                                     {path ? <div className="action">
-                                        <div className="delete"><MdDelete className='deleteIcon' onClick={() => onDelete(item._id)} /></div>
+                                        <div className="delete"><MdDelete
+                                            className='deleteIcon'
+                                            onClick={(e) => {
+                                                e.preventDefault(); // Prevent Link navigation
+                                                e.stopPropagation(); // Stop event bubbling
+                                                onDelete(item._id);
+                                            }}
+                                        /></div>
                                         <Link to={`/editRecipe/${item._id}`} className="editIcon"><FaEdit /></Link>
                                     </div> :
-                                        <div className="heart"><FaHeart onClick={() => favRecipe(item)}
-                                            style={{ color: favItems.includes(item._id) ? "red" : "" }} /> </div>}
+                                        <div className="heart"><FaHeart
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                favRecipe(item);
+                                            }}
+                                            style={{ color: favItems.includes(item._id) ? "red" : "" }}
+                                        /> </div>}
                                 </div>
 
                             </div>
-                        </div>
+                        </Link>
                     )
                 })
             }
