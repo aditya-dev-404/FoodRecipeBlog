@@ -23,7 +23,7 @@ export default function InputForm({ setIsOpen, setToken }) {
     }
     return (
         <>
-            <form action="" className="form" onSubmit={handleOnSubmit}>
+            <form action="" className="form input-form" onSubmit={handleOnSubmit}>
                 <div className="form-control">
                     <label htmlFor="username">Username</label>
                     <input type="text" id='username' className='input' onChange={(event) => { setUserName(event.target.value) }} required />

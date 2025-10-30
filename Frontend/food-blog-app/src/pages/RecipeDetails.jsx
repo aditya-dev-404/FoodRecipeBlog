@@ -7,12 +7,12 @@ export default function RecipeDetail() {
   if (!recipe) return <h2>Loading...</h2>;
 
   return (
-    <div className="recipe-details">
-      <h1>{recipe.title}</h1>
-      <img src={recipe.coverImage?.url} alt={recipe.title} width="400" />
-      <p><b>Cooking Time:</b> {recipe.time}</p>
-      <p><b>Ingredients:</b> {recipe.ingredients}</p>
-      <p><b>Instructions:</b> {recipe.instructions}</p>
-    </div>
+  <div className="recipe-details" id="recipe-details-container">
+  <h1 id="recipe-details-title">{recipe.title}</h1>
+  <img id="recipe-details-image" src={recipe.coverImage?.url} alt={recipe.title} />
+  <p><b>Cooking Time:</b> {recipe.time}</p>
+  <p><b>Ingredients:</b> {recipe.ingredients.join(', ')}</p>
+  <p><b>Instructions:</b> {recipe.instructions}</p>
+</div>
   );
 }

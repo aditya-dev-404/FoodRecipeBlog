@@ -26,11 +26,9 @@ export default function Home() {
             <section className="home">
                 <div className="left">
                     <h1>Food Recipe</h1>
-                    <h5>Lorem ipsum dolor sit amet.
-                    Repellendus, odit! Ratione, eius maxime.
-                    Dolorum, architecto? Ab, vitae vero!
-                    Veritatis, adipisci tempore. Quidem, molestiae.
-                    Tenetur dicta nostrum tempore eligendi?</h5>
+                    <h5>Share your signature recipes, discover global flavors, and save favorites in your digital cookbook. 
+                        Whether you're a seasoned chef or home cook, our beautiful platform makes sharing and exploring recipes delightful. 
+                        Join our vibrant community today—cook, share, and inspire! 🌟</h5>
                     <button onClick={addRecipe}>Share Your recipe</button>
                 </div>
                 <div className="right">
