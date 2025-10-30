@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
-
-
-
-
 * {
   padding: 0;
   margin: 0;
@@ -45,33 +41,7 @@
 
 
 
-
-
-
-
-
-
-
-
-/* Root Variables */
-:root {
-  --primary-dark: #0B3D2E;
-  --primary-mid-dark: #0E4F3A;
-  --primary-mid: #136F52;
-  --primary-light: #1B8F65;
-  --primary-lighter: #2EB086;
-  --primary-lightest: #3EDC94;
-  --white: #FFFFFF;
-  --shadow-sm: 0 2px 8px rgba(11, 61, 46, 0.1);
-  --shadow-md: 0 4px 16px rgba(11, 61, 46, 0.15);
-}
-
-/* Reset for header */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ============== STYLING THE NAVBAR SECTION ================*/
 
 /* Header/Navbar Styles */
 header {
@@ -322,18 +292,18 @@ header ul li a:hover::after {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 200%;
+  width: 100%;
   height: 100%;
   background: linear-gradient(90deg,
       transparent 0%,
       rgba(62, 220, 148, 0.1) 50%,
       transparent 100%);
-  animation: shimmer 8s linear infinite;
+  animation: shimmer 4s linear infinite;
 }
 
 @keyframes shimmer {
   from {
-    left: -100%;
+    left: 0;
   }
 
   to {
@@ -343,13 +313,13 @@ header ul li a:hover::after {
 
 .footer p {
   color: var(--white);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 1px;
   margin: 0;
   position: relative;
   z-index: 1;
-  animation: fadeIn 1s ease-out, float 3s ease-in-out infinite;
+  animation: fadeIn 1s ease-out, float 5s ease-in-out infinite;
 }
 
 @keyframes fadeIn {
@@ -366,11 +336,11 @@ header ul li a:hover::after {
 
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(1px);
   }
 
   50% {
-    transform: translateY(-5px);
+    transform: translateY(0px);
   }
 }
 
@@ -380,19 +350,19 @@ header ul li a:hover::after {
   content: '✨';
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-20%);
   font-size: 1rem;
-  animation: sparkle 2s ease-in-out infinite;
+  animation: sparkle 5s ease-in-out infinite;
 }
 
 .footer p::before {
-  left: -2rem;
+  left: -1rem;
   animation-delay: 0s;
 }
 
 .footer p::after {
-  right: -2rem;
-  animation-delay: 1s;
+  right: -1rem;
+  animation-delay: 2s;
 }
 
 @keyframes sparkle {
@@ -400,12 +370,12 @@ header ul li a:hover::after {
   0%,
   100% {
     opacity: 0;
-    transform: translateY(-50%) scale(0.5);
+    transform: translateY(-20%) scale(1);
   }
 
   50% {
     opacity: 1;
-    transform: translateY(-50%) scale(1);
+    transform: translateY(-20%) scale(2);
   }
 }
 
@@ -507,35 +477,7 @@ header ul li p.login:focus {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ============== STYLING THE HOME SECTION ================*/
 
 
 
@@ -1039,14 +981,7 @@ body {
 
 
 
-
-
-
-
-
-
-
-
+/* ============== STYLING THE RECIPE CARDS ================*/
 
 
 
@@ -1615,13 +1550,7 @@ body {
 
 
 
-
-
-
-
-
-
-
+/* ============== STYLING THE LOGIN FORM ================*/
 
 
 
@@ -2431,13 +2360,7 @@ button[type="submit"]:disabled::after {
 
 
 
-
-
-
-
-
-
-
+/* ============== STYLING THE INDIVIDUAL RECIPES ================*/
 
 
 
