@@ -62,13 +62,13 @@ export default function RecipeItems({ recipes }) {
         try {
             if (favItems.includes(item._id)) {
                 // Remove from favorites
-                await axios.delete(`http://localhost:8080/user/fav/${item._id}`, {
+                await axios.delete(`https://foodrecipeblog-1.onrender.com/user/fav/${item._id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setFavItems(prev => prev.filter(id => id !== item._id));
             } else {
                 // Add to favorites
-                await axios.post(`http://localhost:8080/user/fav/${item._id}`, {}, {
+                await axios.post(`https://foodrecipeblog-1.onrender.com/user/fav/${item._id}`, {}, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setFavItems(prev => [...prev, item._id]);

@@ -93,7 +93,7 @@ const handleOnSubmit = async (event) => {
             formData.append('coverImage', image);
         }
         
-        await axios.post("http://localhost:8080/recipe", formData, {
+        await axios.post("https://foodrecipeblog-1.onrender.com/recipe", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`

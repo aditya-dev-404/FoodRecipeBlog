@@ -11,7 +11,7 @@ import RecipeDetail from './pages/RecipeDetails.jsx';
 // Get all recipes
 const getAllRecipes = async () => {
   try {
-    const res = await axios.get('http://localhost:8080/recipe');
+    const res = await axios.get('https://foodrecipeblog-1.onrender.com/recipe');
     return res.data;
   } catch (err) {
     console.error("Failed to fetch recipes:", err);
@@ -22,7 +22,7 @@ const getAllRecipes = async () => {
 // Get recipe by ID
 const getRecipeById = async ({ params }) => {
   try {
-    const res = await axios.get(`http://localhost:8080/recipe/${params.id}`);
+    const res = await axios.get(`https://foodrecipeblog-1.onrender.com/recipe/${params.id}`);
     return res.data;
   } catch (err) {
     console.error("Failed to fetch recipe:", err);
@@ -74,7 +74,7 @@ const getFavRecipes = async () => {
       return [];
     }
     
-    const res = await axios.get("http://localhost:8080/user/favourites", {
+    const res = await axios.get("https://foodrecipeblog-1.onrender.com/user/favourites", {
       headers: { Authorization: `Bearer ${token}` }
     });
     

@@ -13,7 +13,7 @@ export default function InputForm({ setIsOpen, setToken }) {
     const handleOnSubmit = async (event) => {
         event.preventDefault();
         let endpoint = (isSignup) ? "signup" : "login";
-        await axios.post(`http://localhost:8080/user/${endpoint}`, { username, email, password })
+        await axios.post(`https://foodrecipeblog-1.onrender.com/user/${endpoint}`, { username, email, password })
             .then((res) => {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
