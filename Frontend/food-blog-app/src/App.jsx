@@ -8,7 +8,7 @@ import AddFoodRecipe from './pages/AddFoodRecipe.jsx';
 import EditRecipe from './pages/EditRecipe.jsx';
 import RecipeDetail from './pages/RecipeDetails.jsx';
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL = "https://foodrecipeblogapp.onrender.com"
 // Get all recipes
 const getAllRecipes = async () => {
   try {
