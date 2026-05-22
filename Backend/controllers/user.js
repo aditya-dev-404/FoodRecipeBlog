@@ -86,13 +86,12 @@ const delFavourites = async (req, res) => {
 // Get all favourites
 const getFavourites = async (req, res) => {
     try {
-        const user = await User.findById(req.userId).populate("favourites"); // make sure 'favourites' exists
+        const user = await User.findById(req.userId).populate("favourites"); 
         if (!user) {
             return res.status(404).json({ error: "User not found!" });
         }
         res.status(200).json(user.favourites);
     } catch (err) {
-        console.error("Error in getFavourites:", err.message);
         res.status(500).json({ error: "Failed to get favourites" });
     }
 };

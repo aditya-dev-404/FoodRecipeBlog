@@ -80,7 +80,6 @@ const editRecipe = async (req, res) => {
         });
 
     } catch (err) {
-        console.error("Edit recipe error:", err);
         res.status(500).json({ message: "Failed to update recipe" });
     }
 };
@@ -100,7 +99,6 @@ const deleteRecipe = async (req, res) => {
         await Recipes.findByIdAndDelete(id);
         res.json({ message: "Recipe deleted successfully" });
     } catch (err) {
-        console.error("Delete recipe error:", err);
         res.status(500).json({ message: "Failed to delete recipe" });
     }
 };

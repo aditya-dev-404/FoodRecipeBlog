@@ -83,7 +83,6 @@ const handleOnSubmit = async (event) => {
         
     } catch (err) {
         setError(err.response?.data?.error || 'Failed to add recipe');
-        console.error('Error:', err);
     } finally {
         setLoading(false);
     }
