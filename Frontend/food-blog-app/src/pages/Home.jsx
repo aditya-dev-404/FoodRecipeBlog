@@ -8,6 +8,7 @@ import InputForm from '../components/InputForm';
 
 
 export default function Home() {
+    const BASE_URL = "http://localhost:8080"
     const navigate = useNavigate();
     const recipes = useLoaderData(); // CRITICAL: Get data from loader
     const [isOpen, setIsOpen] = useState(false);

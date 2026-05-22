@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 export default function RecipeItems({ recipes }) {
     const [allRecipes, setAllRecipes] = useState([]);
     const [favItems, setFavItems] = useState([]);
+    const BASE_URL = "http://localhost:8080"
 
     // Set recipes from props (loader data)
     useEffect(() => {
@@ -24,7 +25,7 @@ export default function RecipeItems({ recipes }) {
                 const token = localStorage.getItem("token");
                 if (!token) return; // No token, skip fetching favorites
 
-                const res = await axios.get("http://localhost:8080/user/favourites", {
+                const res = await axios.get(`${BASE_URL}/user/favourites`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 
@@ -40,7 +41,7 @@ export default function RecipeItems({ recipes }) {
 
     const onDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/recipe/${id}`);
+            await axios.delete(`${BASE_URL}/recipe/${id}`);
             alert("Recipe deleted successfully");
             
             // Remove from state
@@ -62,13 +63,13 @@ export default function RecipeItems({ recipes }) {
         try {
             if (favItems.includes(item._id)) {
                 // Remove from favorites
-                await axios.delete(`https://foodrecipeblog-1.onrender.com/user/fav/${item._id}`, {
+                await axios.delete(`${BASE_URL}/user/fav/${item._id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setFavItems(prev => prev.filter(id => id !== item._id));
             } else {
                 // Add to favorites
-                await axios.post(`https://foodrecipeblog-1.onrender.com/user/fav/${item._id}`, {}, {
+                await axios.post(`${BASE_URL}/user/fav/${item._id}`, {}, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setFavItems(prev => [...prev, item._id]);

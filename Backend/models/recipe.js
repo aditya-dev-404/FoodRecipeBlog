@@ -1,5 +1,7 @@
+/* This code snippet is defining a Mongoose schema for 
+a recipe in a Node.js application. Here's a
+breakdown of what each part is doing: */
 const mongoose = require('mongoose');
-
 const recipeSchema = new mongoose.Schema({
     title:{
         type:String,
@@ -27,6 +29,4 @@ const recipeSchema = new mongoose.Schema({
     }
 
 },{timestamps:true})
-
-
 module.exports = mongoose.model('Recipe',recipeSchema);

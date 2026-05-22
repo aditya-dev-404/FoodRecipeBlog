@@ -7,7 +7,7 @@ const getRecipes = async (req, res) => {
     return res.json(recipes);
 };
 
-// 📌 Get single recipe
+// Get single recipe
 const getRecipe = async (req, res) => {
   try {
     const recipe = await Recipes.findById(req.params.id);
@@ -18,7 +18,7 @@ const getRecipe = async (req, res) => {
   }
 };
 
-// 📌 Add recipe
+// Add recipe
 const addRecipe = async (req, res) => {
     try {
         const { title, ingredients, instructions, time } = req.body;
@@ -49,7 +49,7 @@ const addRecipe = async (req, res) => {
 };
 
 
-// 📌 Edit recipe (with optional image replacement)
+// Edit recipe (with optional image replacement)
 const editRecipe = async (req, res) => {
     try {
         const { id } = req.params;
@@ -85,23 +85,19 @@ const editRecipe = async (req, res) => {
     }
 };
 
-// 📌 Delete recipe
+// Delete recipe
 const deleteRecipe = async (req, res) => {
     try {
         const { id } = req.params;
         const recipe = await Recipes.findById(id);
-
         if (!recipe) {
             return res.status(404).json({ message: "Recipe not found" });
         }
-
         // Delete image from Cloudinary if exists
         if (recipe.coverImage?.filename) {
             await cloudinary.uploader.destroy(recipe.coverImage.filename);
         }
-
         await Recipes.findByIdAndDelete(id);
-
         res.json({ message: "Recipe deleted successfully" });
     } catch (err) {
         console.error("Delete recipe error:", err);

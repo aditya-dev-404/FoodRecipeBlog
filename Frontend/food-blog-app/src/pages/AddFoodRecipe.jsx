@@ -1,7 +1,18 @@
+/* This code snippet is a React component named `AddFoodRecipe` that allows users to add a new food
+recipe. Here's a breakdown of what the code is doing: */
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+/* This code snippet defines a React functional component named `AddFoodRecipe`. Within this component,
+the following state variables are initialized using the `useState` hook:
+- `image`: Stores the selected image file for the recipe.
+- `preview`: Stores the preview image URL to display a preview of the selected image.
+- `loading`: Manages the loading state when submitting the recipe form.
+- `error`: Stores any error messages that occur during form submission.
+- `recipeData`: Stores the recipe data entered by the user.
+- `navigate`: Utilizes the `useNavigate` hook from 'react-router-dom' for navigation within the
+application. */
 
 export default function AddFoodRecipe() {
     const [image, setImage] = useState(null);
@@ -10,6 +21,7 @@ export default function AddFoodRecipe() {
     const [error, setError] = useState('');
     const [recipeData, setRecipeData] = useState({});
     const navigate = useNavigate();
+    const BASE_URL = "http://localhost:8080"
 
     const handleOnChange = (event) => {
         let val = (event.target.name === "ingredients") ? event.target.value.split(",") : event.target.value;
@@ -29,45 +41,12 @@ export default function AddFoodRecipe() {
         }
     }
 
-//     const handleOnSubmit = async (event) => {
-//     event.preventDefault();
-//     setLoading(true);
-//     setError('');
-
-//     try {
-//         const token = localStorage.getItem('token');
-        
-//         // Create FormData to send file + data
-//         const formData = new FormData();
-//         formData.append('title', recipeData.title);
-//         formData.append('ingredients', JSON.stringify(recipeData.ingredients));
-//         formData.append('instructions', recipeData.instructions);
-//         formData.append('time', recipeData.time);
-        
-//         // Append image if exists
-//         if (image) {
-//             formData.append('coverImage', image);
-//         }
-        
-//         // Send request with FormData
-//         await axios.post("http://localhost:8080/recipe", formData, {
-//             headers: {
-//                 'Content-Type': 'multipart/form-data',
-//                 'Authorization': `Bearer ${token}`
-//             }
-//         });
-
-//         navigate("/");
-        
-//     } catch (err) {
-//         setError(err.response?.data?.error || 'Failed to add recipe');
-//         console.error('Error:', err);
-//     } finally {
-//         setLoading(false);
-//     }
-// }
-
 // In your handleOnSubmit function, after successful recipe creation:
+/**
+ * The handleOnSubmit function is used to submit a recipe form data to a server, including user
+ * authentication and error handling.
+ * @returns The `handleOnSubmit` function is being returned.
+ */
 const handleOnSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -93,7 +72,7 @@ const handleOnSubmit = async (event) => {
             formData.append('coverImage', image);
         }
         
-        await axios.post("https://foodrecipeblog-1.onrender.com/recipe", formData, {
+        await axios.post(`${BASE_URL}/recipe`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`

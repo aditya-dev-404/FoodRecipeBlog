@@ -50,7 +50,7 @@ const getUser = async (req, res) => {
     res.status(200).json({ user });
 };
 
-// Add to favourites
+
 // Add to favourites
 const addFavourites = async (req, res) => {
   try {

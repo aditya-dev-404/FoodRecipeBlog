@@ -13,12 +13,13 @@ export default function EditRecipe() {
     const [recipeData, setRecipeData] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
+    const BASE_URL = "http://localhost:8080";
 
 
 
     useEffect(() => {
         const getData = async () => {
-            await axios.get(`https://foodrecipeblog-1.onrender.com/recipe/${id}`)
+            await axios.get(`${BASE_URL}/recipe/${id}`)
                 .then(response => {
                     let res = response.data;
                     setRecipeData({
@@ -73,7 +74,7 @@ export default function EditRecipe() {
                 formData.append('coverImage', image);
             }
 
-            await axios.put(`http://localhost:8080/recipe/${id}`, formData, {
+            await axios.put(`${BASE_URL}/recipe/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`

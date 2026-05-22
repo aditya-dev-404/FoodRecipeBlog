@@ -8,10 +8,11 @@ import AddFoodRecipe from './pages/AddFoodRecipe.jsx';
 import EditRecipe from './pages/EditRecipe.jsx';
 import RecipeDetail from './pages/RecipeDetails.jsx';
 
+const BASE_URL = "http://localhost:8080"
 // Get all recipes
 const getAllRecipes = async () => {
   try {
-    const res = await axios.get('https://foodrecipeblog-1.onrender.com/recipe');
+    const res = await axios.get(`${BASE_URL}/recipe`);
     return res.data;
   } catch (err) {
     console.error("Failed to fetch recipes:", err);
@@ -22,7 +23,7 @@ const getAllRecipes = async () => {
 // Get recipe by ID
 const getRecipeById = async ({ params }) => {
   try {
-    const res = await axios.get(`https://foodrecipeblog-1.onrender.com/recipe/${params.id}`);
+    const res = await axios.get(`${BASE_URL}/recipe/${params.id}`);
     return res.data;
   } catch (err) {
     console.error("Failed to fetch recipe:", err);
@@ -74,7 +75,7 @@ const getFavRecipes = async () => {
       return [];
     }
     
-    const res = await axios.get("https://foodrecipeblog-1.onrender.com/user/favourites", {
+    const res = await axios.get(`${BASE_URL}/user/favourites`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     
@@ -95,6 +96,8 @@ const getFavRecipes = async () => {
   }
 };
 
+/* This code snippet is setting up routing for a React application using the `react-router-dom`
+library. Here's a breakdown of what the `const router` is doing: */
 const router = createBrowserRouter([
   {
     path: "/", 
