@@ -13,7 +13,7 @@ export default function EditRecipe() {
     const [recipeData, setRecipeData] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
-    const BASE_URL = "https://foodrecipeblogapp.onrender.com";
+    const BASE_URL = "https://foodrecipeblog.onrender.com";
 
 
 

@@ -21,7 +21,7 @@ export default function AddFoodRecipe() {
     const [error, setError] = useState('');
     const [recipeData, setRecipeData] = useState({});
     const navigate = useNavigate();
-    const BASE_URL = "https://foodrecipeblogapp.onrender.com"
+    const BASE_URL = "https://foodrecipeblog.onrender.com"
 
     const handleOnChange = (event) => {
         let val = (event.target.name === "ingredients") ? event.target.value.split(",") : event.target.value;
@@ -131,5 +131,4 @@ const handleOnSubmit = async (event) => {
         </>
     )
 }
-
 

@@ -8,7 +8,7 @@ import InputForm from '../components/InputForm';
 
 
 export default function Home() {
-    const BASE_URL = "https://foodrecipeblogapp.onrender.com"
+    const BASE_URL = "https://foodrecipeblog.onrender.com"
     const navigate = useNavigate();
     const recipes = useLoaderData(); // CRITICAL: Get data from loader
     const [isOpen, setIsOpen] = useState(false);

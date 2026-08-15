@@ -9,7 +9,7 @@ export default function InputForm({ setIsOpen, setToken }) {
     const [password, setPass] = useState("");
     const [isSignup, setIsSignup] = useState(false);
     const [error, setError] = useState("");
-    const BASE_URL = "https://foodrecipeblogapp.onrender.com"
+    const BASE_URL = "https://foodrecipeblog.onrender.com"
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();

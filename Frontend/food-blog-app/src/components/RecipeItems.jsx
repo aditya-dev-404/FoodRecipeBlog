@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 export default function RecipeItems({ recipes }) {
     const [allRecipes, setAllRecipes] = useState([]);
     const [favItems, setFavItems] = useState([]);
-    const BASE_URL = "https://foodrecipeblogapp.onrender.com"
+    const BASE_URL = "https://foodrecipeblog.onrender.com"
 
     // Set recipes from props (loader data)
     useEffect(() => {
