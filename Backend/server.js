@@ -18,6 +18,12 @@ const userRouters = require("./routes/user.js")
 
 app.use("/user",userRouters);
 app.use("/recipe",recipeRouters)
+app.get("/ch", (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        message: "FoodRecipeBlog backend is running"
+    });
+});
 
 app.listen(PORT,()=>{
     console.log(`listening to port ${PORT} 🚀`);
