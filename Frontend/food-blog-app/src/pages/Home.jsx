@@ -26,6 +26,7 @@ export default function Home() {
         <>
             <section className="home">
                 <div className="left">
+                <p className="text-xs text-yellow-600 bg-yellow-50 border border-yellow-200 rounded-md px-3 py-2 text-center">⚠️ This project runs on a free-tier Render deployment, so services may be slow to start or temporarily unavailable.</p>
                     <h1>Food Recipe</h1>
                     <h5>Share your signature recipes, discover global flavors, and save favorites in your digital cookbook. 
                         Whether you're a seasoned chef or home cook, our beautiful platform makes sharing and exploring recipes delightful. 
